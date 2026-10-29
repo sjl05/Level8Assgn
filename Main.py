@@ -37,7 +37,7 @@ while True:
 # Code for the user to choose actions to perform
 while True:
     try:
-        print("Here are some options of things to do: deposit, withdraw, view account information, stop")
+        print("Here are some options of things to do: deposit, withdraw, view account information, quit")
         direction = input().strip().lower()
         if direction == "deposit":
             bank_account.deposit()
@@ -45,7 +45,7 @@ while True:
             bank_account.withdraw()
         elif direction == "view account information":
             bank_account.print_account_info()
-        elif direction == "stop":
+        elif direction == "quit":
             bank_account.quit()
             break
         else:
