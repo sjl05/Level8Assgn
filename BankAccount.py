@@ -38,11 +38,10 @@ class BankAccount():
             new_acct_num_list = []
             for i in range(6):
                 new_acct_num_list.append(rd.randint(0,9))
-            possible_acct_num = ''.join(map(str, new_acct_num_list))
-            if possible_acct_num not in account_nums:
+            new_acct_num = ''.join(map(str, new_acct_num_list))
+            if new_acct_num not in account_nums:
                 break
-        new_accout_number = int(possible_acct_num)
-        return new_accout_number
+        return new_acct_num
 
     def valid_account_num(self, customer_input_acct_num):
         valid_number = False
@@ -52,7 +51,7 @@ class BankAccount():
             next(reader)
             for row in reader:
                 account_nums.append(row[1])
-        if customer_input_acct_num in account_nums:
+        if str(customer_input_acct_num) in account_nums:
             valid_number = True
         return valid_number
 
@@ -114,6 +113,6 @@ class BankAccount():
                 writer = csv.writer(account_roster)
                 writer.writerows(total_account_roster_info)
         elif self.new_user == True:
-            with open("account_roster.csv", mode='a', newline='', encoding="utf-8") as account_roster:
+            with open("account_roster.csv", mode='a', newline='/n', encoding="utf-8") as account_roster:
                 appender = csv.writer(account_roster)
                 appender.writerow([self.owner, str(self.account_number), str(self.balance)])

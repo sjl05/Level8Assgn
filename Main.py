@@ -73,7 +73,7 @@ equivalent information.
 Submit your PUBLIC GitHub link via Canvas.
 """
 from BankAccount import BankAccount as BA
-bot_account = BA("Bot",000000, False)
+bot_account = BA("Bot","000000", False)
 
 print("Welcome to Lyon's Bank!")
 print("Please enter your account number below. ")
@@ -86,17 +86,15 @@ while True:
             name = bot_account.get_new_username()
             new_account_num = bot_account.assign_account_num()
             bank_account = BA(name, new_account_num, True)
-            print("Perfect, we've set you up with a balance of $0.00 and an account number")
+            print(f"Perfect, we've set you up with a balance of $0.00 and {bank_account.account_number} account number")
             break
-        elif bot_account.valid_account_num(int(initialize)):
-            if len(initialize) < 6 or len(initialize) > 6:
-                print("Your account number must be 6 digits")
-            else:
-                initialize = int(initialize)
-                account_info = bot_account.get_account_info(initialize)
-                bank_account = BA(account_info[0], account_info[1], False)
-                bank_account.balance = account_info[2]
-                break
+        elif bot_account.valid_account_num(initialize):
+            account_info = bot_account.get_account_info(initialize)
+            bank_account = BA(account_info[0], account_info[1], False)
+            bank_account.balance = account_info[2]
+            break
+        else:
+            print("Something went wrong, please try again")
     except ValueError:
         print("Please enter your 6 digit account number:")
     except:
@@ -112,6 +110,7 @@ while True:
         elif direction == "view account information":
             bank_account.print_account_info()
         elif direction == "stop":
+            bank_account.quit()
             break
     except:
         print("Something went wrong")
