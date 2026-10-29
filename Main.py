@@ -86,11 +86,12 @@ while True:
             name = bot_account.get_new_username()
             new_account_num = bot_account.assign_account_num()
             bank_account = BA(name, new_account_num, True)
-            print(f"Perfect, we've set you up with a balance of $0.00 and {bank_account.account_number} account number")
+            print(f"Perfect, we've set you up with a balance of $0.00\n{bank_account.account_number} is your new account number")
             break
         elif bot_account.valid_account_num(initialize):
-            account_info = bot_account.get_account_info(initialize)
+            account_info, customer_row = bot_account.get_account_info(initialize)
             bank_account = BA(account_info[0], account_info[1], False)
+            bank_account.customer_row = customer_row
             bank_account.balance = account_info[2]
             break
         else:

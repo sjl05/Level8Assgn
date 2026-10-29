@@ -1,6 +1,5 @@
 import random as rd
 import csv
-import sys
 class BankAccount():
     default_balance = 0.00
 
@@ -19,11 +18,10 @@ class BankAccount():
             for row in reader:
                 account_nums.append(row[1])
             if customer_input_acct_num in account_nums:
-                self.customer_row = account_nums.index(customer_input_acct_num)
-                raw_customer_data = reader[self.customer_row]
-                raw_customer_data[1] = int(raw_customer_data[1])
+                customer_row = account_nums.index(customer_input_acct_num)
+                raw_customer_data = reader[customer_row]
                 raw_customer_data[2] = float(raw_customer_data[2])
-                return raw_customer_data
+                return raw_customer_data, customer_row
             else:
                 print("It appears you didn't enter the information correctly. \nPlease try again")
 
