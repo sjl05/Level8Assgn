@@ -106,8 +106,7 @@ class BankAccount():
         if self.new_user == False:
             with open("account_roster.csv", mode='r', newline='', encoding="utf-8") as account_roster:
                 rows = list(csv.reader(account_roster))
-                rows[self.customer_row][2] = str(self.balance)
-                print(rows[self.customer_row][2])
+                rows[self.customer_row + 2][2] = str(self.balance)
             with open("account_roster.csv", mode='w', newline='', encoding="utf-8") as account_roster:
                 writer = csv.writer(account_roster)
                 writer.writerows(rows)

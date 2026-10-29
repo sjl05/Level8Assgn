@@ -99,10 +99,10 @@ while True:
             print("Something went wrong, please try again")
     except ValueError:
         print("Please enter your 6 digit account number:")
-    #except:
-        #print("Please try again")
+    except:
+        print("Please try again")
 while True:
-    #try:
+    try:
         print("Here are some options of things to do: deposit, withdraw, view account information, stop")
         direction = input().strip().lower()
         if direction == "deposit":
@@ -116,5 +116,5 @@ while True:
             break
         else:
             print("Please choose one of the following options")
-    #except:
-        #print("Something went wrong")
+    except:
+        print("Something went wrong")
