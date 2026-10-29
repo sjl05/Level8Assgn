@@ -15,11 +15,12 @@ class BankAccount():
             reader = csv.reader(account_roster)
             next(reader)
             next(reader)
-            for row in reader:
+            rows = list(csv.reader(account_roster))
+            for row in rows:
                 account_nums.append(row[1])
             if customer_input_acct_num in account_nums:
                 customer_row = account_nums.index(customer_input_acct_num)
-                raw_customer_data = reader[customer_row]
+                raw_customer_data = rows[customer_row]
                 raw_customer_data[2] = float(raw_customer_data[2])
                 return raw_customer_data, customer_row
             else:
@@ -104,13 +105,13 @@ class BankAccount():
     def quit(self):
         if self.new_user == False:
             with open("account_roster.csv", mode='r', newline='', encoding="utf-8") as account_roster:
-                reader = csv.reader(account_roster)
-                total_account_roster_info = reader
-                total_account_roster_info[self.customer_row][2] = str(self.balance)
+                rows = list(csv.reader(account_roster))
+                rows[self.customer_row][2] = str(self.balance)
+                print(rows[self.customer_row][2])
             with open("account_roster.csv", mode='w', newline='', encoding="utf-8") as account_roster:
                 writer = csv.writer(account_roster)
-                writer.writerows(total_account_roster_info)
+                writer.writerows(rows)
         elif self.new_user == True:
-            with open("account_roster.csv", mode='a', newline='/n', encoding="utf-8") as account_roster:
+            with open("account_roster.csv", mode='a', newline='', encoding="utf-8") as account_roster:
                 appender = csv.writer(account_roster)
                 appender.writerow([self.owner, str(self.account_number), str(self.balance)])

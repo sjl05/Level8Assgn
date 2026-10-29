@@ -93,15 +93,16 @@ while True:
             bank_account = BA(account_info[0], account_info[1], False)
             bank_account.customer_row = customer_row
             bank_account.balance = account_info[2]
+            print(f"Welcome back {bank_account.owner.title()}!")
             break
         else:
             print("Something went wrong, please try again")
     except ValueError:
         print("Please enter your 6 digit account number:")
-    except:
-        print("Please try again")
+    #except:
+        #print("Please try again")
 while True:
-    try:
+    #try:
         print("Here are some options of things to do: deposit, withdraw, view account information, stop")
         direction = input().strip().lower()
         if direction == "deposit":
@@ -113,5 +114,7 @@ while True:
         elif direction == "stop":
             bank_account.quit()
             break
-    except:
-        print("Something went wrong")
+        else:
+            print("Please choose one of the following options")
+    #except:
+        #print("Something went wrong")
