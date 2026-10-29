@@ -73,38 +73,45 @@ equivalent information.
 Submit your PUBLIC GitHub link via Canvas.
 """
 from BankAccount import BankAccount as BA
-bot_account = BA("Bot",000000)
+bot_account = BA("Bot",000000, False)
 
 print("Welcome to Lyon's Bank!")
 print("Please enter your account number below. ")
 print("No account? Simply type \"create account\" to make a new account. ")
 while True:
     try:
-        initialize = input()
-        if initialize.strip().lower() == "create account":
+        initialize = input().strip().lower()
+        if initialize == "create account":
             print("Welcome new user!")
-            while True:
-                try:
-                    name = input("What is your name: ")
-                    print(f"You entered {name} as your name. Is that correct?")
-                    yes_no = input()
-                    if yes_no.strip().lower() == "yes":
-                        new_account_num = bot_account.assign_account_num()
-                        bank_account = BA(name, new_account_num)
-                        print("Perfect, we've set you up with a balance of $0.00 and an account number")
-                        break
-                    elif yes_no.strip().lower() == "no":
-                        print("Okay, we won't use that name. ")
-                except:
-                    print("Something went wrong, please try again")
+            name = bot_account.get_new_username()
+            new_account_num = bot_account.assign_account_num()
+            bank_account = BA(name, new_account_num, True)
+            print("Perfect, we've set you up with a balance of $0.00 and an account number")
+            break
         elif bot_account.valid_account_num(int(initialize)):
             if len(initialize) < 6 or len(initialize) > 6:
                 print("Your account number must be 6 digits")
-            initialize = int(initialize)
-            account_info = BA.get_account_info(initialize)
-            bank_account = BA(account_info[0], int(account_info[1]))
-            bank_account.balance = float(account_info[2])
+            else:
+                initialize = int(initialize)
+                account_info = bot_account.get_account_info(initialize)
+                bank_account = BA(account_info[0], account_info[1], False)
+                bank_account.balance = account_info[2]
+                break
     except ValueError:
         print("Please enter your 6 digit account number:")
+    except:
+        print("Please try again")
+while True:
+    try:
+        print("Here are some options of things to do: deposit, withdraw, view account information, stop")
+        direction = input().strip().lower()
+        if direction == "deposit":
+            bank_account.deposit()
+        elif direction == "withdraw":
+            bank_account.withdraw()
+        elif direction == "view account information":
+            bank_account.print_account_info()
+        elif direction == "stop":
+            break
     except:
         print("Something went wrong")
